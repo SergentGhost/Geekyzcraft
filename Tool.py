@@ -1,10 +1,34 @@
-import os
-import logging
-from datetime import datetime
-import requests
-import socket
+# Directory structure:
+# tools/
+#   |- networking/
+#   |     |- ip_check.py
+#   |     |- port_scan.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- os/
+#   |     |- username.py
+#   |     |- website_history.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- security/
+#   |     |- tool1.py
+#   |     |- tool2.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- main_tool.py
 
-# Setup for colors and logging
+# main_tool.py
+import os
+import sys
+import importlib
+
+# Colors for Linux terminal
 RESET = "\033[0m"
 GREEN = "\033[92m"
 RED = "\033[91m"
@@ -12,16 +36,7 @@ CYAN = "\033[96m"
 YELLOW = "\033[93m"
 BOLD = "\033[1m"
 
-logging.basicConfig(filename="errors.log", level=logging.ERROR)
-
-def log_error(message):
-    logging.error(f"{datetime.now()} - {message}")
-
-def clear_screen():
-    """Clears the console screen."""
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def print_banner():
+def display_banner():
     """Displays a fancy banner."""
     print(f"{YELLOW}{BOLD}")
     print("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░")
@@ -35,69 +50,111 @@ def print_banner():
     print("███████████████████████████████████████████████   ██████████████████████████████")
     print(f"{RESET}")
     
-def load_oss_tools():
-    # Placeholder for OSS tools
-    print(f"{CYAN}OSS tools are under construction...{RESET}")
-    input(f"{YELLOW}Press Enter to return to the main menu...{RESET}")
+def clear_screen():
+    """Clears the terminal screen."""
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For macOS and Linux
+        os.system('clear')
 
-def load_security_tools():
-    # Placeholder for Security tools
-    print(f"{CYAN}Security tools are under construction...{RESET}")
-    input(f"{YELLOW}Press Enter to return to the main menu...{RESET}")
+def display_menu():
+    print("""
+Multi-Purpose Tool
+-------------------
+1. Networking Tools
+2. OS Tools
+3. Security Tools
+4. Exit
+    """)
 
-    # tool.py
+def import_and_run(module_name, function_name):
+    try:
+        # Dynamically import the module
+        module = importlib.import_module(module_name)
+        # Retrieve the function from the module
+        func = getattr(module, function_name)
+        func()
+    except ModuleNotFoundError:
+        print(f"Error: Module '{module_name}' not found. Check your directory structure.")
+    except AttributeError:
+        print(f"Error: Function '{function_name}' not found in module '{module_name}'.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
-def load_networking_tools():
-    from Networking import track_ip  # Import the function directly
-    return track_ip
+def networking_tools():
+    tools = {
+        '1': ('ip_check', 'run'),
+        '2': ('port_scan', 'run'),
+        '3': ('tool3', 'run'),
+        '4': ('tool4', 'run'),
+        '5': ('tool5', 'run')
+    }
+    print("Networking Tools:")
+    for key, value in tools.items():
+        print(f"{key}. {value[0]}")
+    choice = input("Select a tool: ")
+    if choice in tools:
+        module, func = tools[choice]
+        import_and_run(f"networking.{module}", func)
+    else:
+        print("Invalid choice.")
 
+def os_tools():
+    tools = {
+        '1': ('username', 'run'),
+        '2': ('website_history', 'run'),
+        '3': ('tool3', 'run'),
+        '4': ('tool4', 'run'),
+        '5': ('tool5', 'run')
+    }
+    print("OS Tools:")
+    for key, value in tools.items():
+        print(f"{key}. {value[0]}")
+    choice = input("Select a tool: ")
+    if choice in tools:
+        module, func = tools[choice]
+        import_and_run(f"os.{module}", func)
+    else:
+        print("Invalid choice.")
 
-# Main menu to choose categories
-def menu():
+def security_tools():
+    tools = {
+        '1': ('tool1', 'run'),
+        '2': ('tool2', 'run'),
+        '3': ('tool3', 'run'),
+        '4': ('tool4', 'run'),
+        '5': ('tool5', 'run')
+    }
+    print("Security Tools:")
+    for key, value in tools.items():
+        print(f"{key}. {value[0]}")
+    choice = input("Select a tool: ")
+    if choice in tools:
+        module, func = tools[choice]
+        import_and_run(f"security.{module}", func)
+    else:
+        print("Invalid choice.")
+
+def main():
     while True:
         clear_screen()
-        print_banner()
-        print(f"{CYAN}{BOLD}Choose a Category:{RESET}")
-        print("1. Networking")
-        print("2. OSS")
-        print("3. Security")
-        print("4. Exit")
-
-        choice = input(f"\n{YELLOW}Enter your choice: {RESET}")
-        
-        if choice == "1":
-            track_ip = load_networking_tools()  # Load the track_ip function here
-            networking_menu(track_ip)
-        elif choice == "2":
-            load_oss_tools()
-        elif choice == "3":
-            load_security_tools()
-        elif choice == "4":
-            print(f"{GREEN}Exiting the tool. Goodbye!{RESET}")
-            break
-        else:
-            print(f"{RED}Invalid choice. Please try again.{RESET}")
-            input(f"\n{YELLOW}Press Enter to return to the menu...{RESET}")
-
-# Networking specific menu
-def networking_menu(track_ip):
-    while True:
+        display_banner()
+        display_menu()
+        choice = input("Select an option: ")
         clear_screen()
-        print_banner()
-        print(f"{CYAN}{BOLD}Networking Tools:{RESET}")
-        print("1. Track IP")
-        print("2. Back to Main Menu")
-
-        choice = input(f"\n{YELLOW}Enter your choice: {RESET}")
-        
-        if choice == "1":
-            ip = input(f"{CYAN}Enter the IP address: {RESET}")
-            track_ip(ip)
-        elif choice == "2":
-            break
+        display_banner()
+        if choice == '1':
+            networking_tools()
+        elif choice == '2':
+            os_tools()
+        elif choice == '3':
+            security_tools()
+        elif choice == '4':
+            print("Exiting... Goodbye!")
+            sys.exit()
         else:
-            print(f"{RED}Invalid choice. Please try again.{RESET}")
-            input(f"\n{YELLOW}Press Enter to return to the networking menu...{RESET}")
+            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    menu()
+    main()
+

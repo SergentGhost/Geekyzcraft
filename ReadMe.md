@@ -1,6 +1,4 @@
-
 # Hi, I'm Albert! 👋
-
 
 ## GeekyzCraft
 > **"Empowering Ethical Innovation for Everyone."**, such as "Powerful software tools by Geekyz Inc."
@@ -8,7 +6,7 @@
 ---
 
 ## 📖 Description
-Tusahr is a powerful tool developed by Geekyz Inc., designed with simplicity and accessibility in mind. This software empowers individuals, even those without extensive technical expertise, to harness its capabilities effectively.
+Geekyzcraft is a powerful tool developed by Geekyz Inc., designed with simplicity and accessibility in mind. This software empowers individuals, even those without extensive technical expertise, to harness its capabilities effectively.
 
 Built for ethical use only, this tool ensures that users can achieve their goals responsibly while adhering to the highest standards of integrity. Whether you’re a beginner exploring possibilities or an expert looking for reliable functionality, [Project Name] is crafted to meet your needs without compromising ease of use.
 
@@ -69,6 +67,8 @@ However, due to the licensing terms, modifications to the codebase are not permi
 ## 🛡️ Support
 If you encounter any issues or have questions, reach out to **Geekyz Inc.** at:  
 - 📧 [geekysamz@gmail.com]   
+- Discord: ghost_05x 
+- Instagram: @albert__burney
 
 ---
 
