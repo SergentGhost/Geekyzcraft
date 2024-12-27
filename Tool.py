@@ -85,9 +85,9 @@ def networking_tools():
     tools = {
         '1': ('ip_check', 'run'),
         '2': ('port_scan', 'run'),
-        '3': ('tool3', 'run'),
-        '4': ('tool4', 'run'),
-        '5': ('tool5', 'run')
+        '3': ('vulnerability_scanner', 'run'),
+        '4': ('network_scanner', 'run'),
+        '5': ('phone_info', 'run')
     }
     print("Networking Tools:")
     for key, value in tools.items():
