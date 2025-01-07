@@ -17,6 +17,32 @@ Key Highlights:
 - Optimized for safe and ethical applications.
 - Geekyz Inc. is committed to delivering solutions that are not just powerful but also accessible and responsible.
 
+# Directory structure:
+# tools/
+#   |- networking/
+#   |     |- ip_check.py
+#   |     |- port_scan.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- os/
+#   |     |- username.py
+#   |     |- website_history.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- security/
+#   |     |- tool1.py
+#   |     |- tool2.py
+#   |     |- tool3.py
+#   |     |- tool4.py
+#   |     |- tool5.py
+#   |
+#   |- main_tool.py
+
+
 
 ---
 
